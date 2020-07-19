@@ -10,7 +10,7 @@
 
 let number = /^[-+]?(?:(?:\d+[.]?\d*)|(?:\d*[.]\d+))(?:[eE][-+]?\d+)?$/;
 
-// Provided in startting code
+// Provided in starting code
 // Tests:
 for (let str of [
     "1",
