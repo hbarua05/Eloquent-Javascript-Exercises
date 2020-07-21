@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Elements by Tag Name</title>
+    </head>
+    <body>
+        <h1>Heading with a <span>span</span> element.</h1>
+        <p>A paragraph with <span>one</span>, <span>two</span> spans.</p>
+
+        <script>
+            function byTagName(node, tagName) {
+                // Defining the array that will be returned
+                let answer = [];
+                // Helper check function
+                /* This function traverses the DOM tree to find all of the descendant element nodes with the given tag name*/
+                function check(node) {
+                    // Nodelist of children of the given node
+                    let childList = node.children;
+                    // Traversing through it children element nodes
+                    for (let i = 0; i < childList.length; i++) {
+                        let child = childList[i];
+                        /* If the child node being assessed has no children and it matches the tagName,
+                        the node is pushed to the answer array*/
+                        if (
+                            child.children.length == 0 &&
+                            child.nodeName.toLowerCase() == tagName
+                        ) {
+                            answer.push(child);
+                        } else {
+                            /* If the node with children matches the tagName,
+                            then it is pushed to the answer array*/
+                            if (child.nodeName.toLowerCase() == tagName) {
+                                answer.push(child);
+                            }
+                            /* Regardless of getting a match,
+                            the children nodes of the current child nodes is assessed for a match*/
+                            check(child);
+                        }
+                    }
+                }
+                // Check function invoked
+                /* ==============================================================================================
+                NOTE: Whenever pushing to the answer array,
+                the check function's being called have access to the array is due to lexical scoping. Remember, the check functions scope is always enclosed by the the byTagName scope.
+                ===============================================================================================*/
+                check(node);
+                return answer;
+            }
+
+            console.log(byTagName(document.body, "h1").length);
+            // → 1
+            console.log(byTagName(document.body, "span").length);
+            // → 3
+            let para = document.querySelector("p");
+            console.log(byTagName(para, "span").length);
+            // → 2
+        </script>
+    </body>
+</html>
