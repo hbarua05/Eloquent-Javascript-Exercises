@@ -21,14 +21,16 @@
                     // Traversing through the child nodes
                     for (let i = 0; i < childList.length; i++) {
                         let child = childList[i];
-                        /* If the child node being assessed, itself has no children, and it matches the given tagName, then that child node is pushed to the answer array */
+                        /* If the child node being assessed, itself has no children, and it matches the given tagName,
+                        then that child node is pushed to the answer array */
                         if (
                             child.children.length == 0 &&
                             child.nodeName.toLowerCase() == tagName
                         ) {
                             answer.push(child);
                         } else {
-                            /* On the other hand, if the child node itself has children, but matches the given tagName, then that child node is pushed to the answer array*/
+                            /* On the other hand, if the child node itself has children, but matches the given tagName,
+                            then that child node is pushed to the answer array*/
                             if (child.nodeName.toLowerCase() == tagName) {
                                 answer.push(child);
                             }
@@ -41,7 +43,8 @@
                 // Check function invoked
                 /* ==============================================================================================
                 NOTE: Whenever pushing to the answer array,
-                the check function's being called have access to the array is due to lexical scoping. Remember, the check functions scope is always enclosed by the the byTagName scope.
+                the check functions being called has access to the array due to lexical scoping.
+                Remember, the check function's scope is always enclosed by the byTagName scope.
                 ===============================================================================================*/
                 check(node);
                 return answer;
