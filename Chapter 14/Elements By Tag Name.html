@@ -14,28 +14,26 @@
                 // Defining the array that will be returned
                 let answer = [];
                 // Helper check function
-                /* This function traverses the DOM tree to find all of the descendant element nodes with the given tag name*/
+                /* check is a recursive function that traverses the DOM tree to find all of the descendant element nodes with the given tag name*/
                 function check(node) {
                     // Nodelist of children of the given node
                     let childList = node.children;
-                    // Traversing through it children element nodes
+                    // Traversing through the child nodes
                     for (let i = 0; i < childList.length; i++) {
                         let child = childList[i];
-                        /* If the child node being assessed has no children and it matches the tagName,
-                        the node is pushed to the answer array*/
+                        /* If the child node being assessed, itself has no children, and it matches the given tagName, then that child node is pushed to the answer array */
                         if (
                             child.children.length == 0 &&
                             child.nodeName.toLowerCase() == tagName
                         ) {
                             answer.push(child);
                         } else {
-                            /* If the node with children matches the tagName,
-                            then it is pushed to the answer array*/
+                            /* On the other hand, if the child node itself has children, but matches the given tagName, then that child node is pushed to the answer array*/
                             if (child.nodeName.toLowerCase() == tagName) {
                                 answer.push(child);
                             }
                             /* Regardless of getting a match,
-                            the children nodes of the current child nodes is assessed for a match*/
+                            the children of the current child node is assessed for a match*/
                             check(child);
                         }
                     }
