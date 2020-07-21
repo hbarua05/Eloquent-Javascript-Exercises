@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Build a Table</title>
+    </head>
+    <body>
+        <h1>Mountains</h1>
+
+        <div id="mountains"></div>
+
+        <script>
+            const MOUNTAINS = [
+                { name: "Kilimanjaro", height: 5895, place: "Tanzania" },
+                { name: "Everest", height: 8848, place: "Nepal" },
+                { name: "Mount Fuji", height: 3776, place: "Japan" },
+                { name: "Vaalserberg", height: 323, place: "Netherlands" },
+                { name: "Denali", height: 6168, place: "United States" },
+                { name: "Popocatepetl", height: 5465, place: "Mexico" },
+                { name: "Mont Blanc", height: 4808, place: "Italy/France" },
+            ];
+
+            // ============ Creating the first row of headers ============ //
+
+            // Create a table tag
+            let table = document.createElement("table");
+            // Create a row tag
+            let row = document.createElement("tr");
+
+            // Iterate through keys of the first object in the MOUNTAINS array
+            for (let column of Object.keys(MOUNTAINS[0])) {
+                // Create a header tag
+                let header = document.createElement("th");
+                /* Add a text node as a child of the header, 
+                with the text being each of the keys */
+                header.appendChild(document.createTextNode(`${column}`));
+                // Append the header tag to the row as a child
+                row.appendChild(header);
+            }
+            // Finally append the row to table as a child
+            table.appendChild(row);
+            // ============================================================//
+
+            // Iterate through each object in array
+            for (let object of MOUNTAINS) {
+                // Create a row tag
+                row = document.createElement("tr");
+                // Iterate through each value in the object
+                for (let columninfo of Object.keys(object)) {
+                    // Create a data cell tag
+                    let data = document.createElement("td");
+                    /* Add a text node as a child of the data cell, 
+                    with the text being each of the values */
+                    data.appendChild(
+                        document.createTextNode(`${object[columninfo]}`)
+                    );
+                    // If the value is a number, align it to the right of the cell
+                    if (typeof object[columninfo] == "number") {
+                        data.style.textAlign = "right";
+                    }
+                    // Lastly, append the data cell as a child to the row
+                    row.appendChild(data);
+                }
+                // Append the created row to the table
+                table.appendChild(row);
+            }
+
+            // Select the div with id = mountains and add the table as a child
+            document.querySelector("div").appendChild(table);
+        </script>
+    </body>
+</html>
