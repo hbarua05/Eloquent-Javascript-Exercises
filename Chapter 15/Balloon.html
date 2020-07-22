@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Balloon</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            p {
+                font-size: 20px;
+                display: block;
+                text-align: center;
+                margin-top: 35vh;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="balloon">🎈</p>
+        <script>
+            let balloon = document.querySelector("p");
+
+            document.body.addEventListener("keydown", changeSize);
+
+            function changeSize(event) {
+                let fontSize = parseFloat(
+                    window
+                        .getComputedStyle(balloon, null)
+                        .getPropertyValue("font-size")
+                );
+                let pop = false;
+                if (fontSize > 100) {
+                    pop = true;
+                }
+                if (event.key == "ArrowUp" && !pop) {
+                    balloon.style.fontSize = `${fontSize * 1.1}px`;
+                } else if (event.key == "ArrowDown" && !pop) {
+                    balloon.style.fontSize = `${fontSize * 0.9}px`;
+                } else if (pop) {
+                    balloon.innerText = "💥";
+                    window.removeEventListener("keydown", changeSize);
+                }
+            }
+        </script>
+    </body>
+</html>
