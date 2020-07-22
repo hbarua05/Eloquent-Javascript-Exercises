@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .dotClass {
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                background-color: green;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            // setting the size of the dotList
+            const SIZE = 10;
+            let dotList = [];
+
+            // Creating the list of dots
+            for (let i = 0; i < SIZE; i++) {
+                let dot = document.createElement("div");
+                dot.className = "dotClass";
+                dotList.push(dot);
+                // Add dot to the body
+                document.body.appendChild(dot);
+            }
+            let dotNo = 0;
+
+            window.addEventListener("mousemove", animation);
+
+            function animation(event) {
+                // Loops through every dot when mouse moved
+                let currDot = dotList[dotNo % SIZE];
+                // Set the dots postion at mouse position
+                currDot.style.left = `${event.pageX - 4}px`;
+                currDot.style.top = `${event.pageY - 4}px`;
+                // Go to the next dot
+                dotNo++;
+            }
+        </script>
+    </body>
+</html>
