@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tabs</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .panel {
+                display: flex;
+            }
+            .tab {
+                padding: 5px 10px;
+                outline: none;
+            }
+            div[data-tabname] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <tab-panel>
+            <div data-tabname="one">Tab one</div>
+            <div data-tabname="two">Tab two</div>
+            <div data-tabname="three">Tab three</div>
+        </tab-panel>
+        <script>
+            let tabList = [];
+            function asTabs(node) {
+                // First creating the tab panel
+                let ans = document.querySelectorAll("div[data-tabname]");
+                let panel = document.createElement("div");
+                panel.className = "panel";
+                for (let i = 0; i < ans.length; i++) {
+                    let content = ans[i].getAttribute("data-tabname");
+                    let tab = document.createElement("button");
+                    tab.innerText = content;
+                    tab.className = "tab";
+                    panel.appendChild(tab);
+                }
+                // Inserting the panel into DOM
+                document.body.insertBefore(
+                    panel,
+                    document.querySelector("tab-panel")
+                );
+
+                // Setting default tab button and content to show
+                let currTabDiv = document.querySelector("[data-tabname]");
+                currTabDiv.style.display = "block";
+                // Setting default button's color to red
+                let curr = document.querySelector(".tab");
+                curr.style.color = "red";
+
+                // Add eventlistener for button clicks
+                panel.addEventListener("click", (event) => {
+                    // Only respond when button is clicked
+                    if (event.target.getAttribute("class") == "tab") {
+                        let dataTabName = event.target.innerText;
+                        let newTabDiv = document.querySelector(
+                            `div[data-tabname=${dataTabName}]`
+                        );
+                        // Displaying the new Tabcontent
+                        currTabDiv.style.display = "none";
+                        currTabDiv = newTabDiv;
+                        currTabDiv.style.display = "block";
+                        // Changing color of button on tab panel
+                        curr.style.color = "black";
+                        event.target.style.color = "red";
+                        curr = event.target;
+                    }
+                });
+            }
+
+            asTabs(document.querySelector("tab-panel"));
+        </script>
+    </body>
+</html>
