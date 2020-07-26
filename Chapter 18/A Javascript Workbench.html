@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<script src="code/chapter/18_http.js"></script>
+
+<textarea id="code">return "hi"; what</textarea>
+<button id="button">Run</button>
+<pre id="output"></pre>
+
+<script>
+    // Your code here.
+    // Selecting button
+    let button = document.querySelector("#button");
+    // Selecting the output div
+    let output = document.querySelector("#output");
+    // run runCode when Run button is clicked
+    button.addEventListener("click", runCode);
+
+    function runCode() {
+        // Selects the lastest text in the area
+        let code = document.querySelector("#code").value;
+        // Adds output of code or an error into the output div
+        try {
+            output.textContent = Function(code)();
+        } catch (e) {
+            output.textContent = e;
+        }
+    }
+</script>
